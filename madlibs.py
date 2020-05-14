@@ -37,9 +37,42 @@ def greet_person():
 
     compliment = choice(AWESOMENESS)
 
+
     return render_template("compliment.html",
                            person=player,
                            compliment=compliment)
+
+@app.route('/game')
+def show_madlib_form():
+
+    game = request.args.get("play")
+
+    if game == "yes":
+
+        return render_template("game.html")
+
+    else:
+
+        return render_template("goodbye.html")
+
+@app.route('/madlib')
+def show_madlib():
+
+    name = request.args.get("person")
+
+    color = request.args.get("color")
+
+    thing = request.args.get("noun")
+
+    description = request.args.get("adjective")
+
+
+
+    return render_template("madlib.html",
+                           person=name,
+                           color=color,
+                           noun=thing,
+                           adjective=description)
 
 
 if __name__ == '__main__':
